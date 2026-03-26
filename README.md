@@ -1,4 +1,3 @@
-cat << 'EOF' > README.md
 # 🐧 The Open Source Audit — Linux Kernel
 
 <div align="center">
@@ -32,8 +31,8 @@ cat << 'EOF' > README.md
 This capstone project for the Open Source Software (OSS NGMC) course at VIT provides a comprehensive audit of the Linux Kernel alongside practical command-line implementations.
 
 **Key Components:**
-* **Structured Audit:** An in-depth analysis of the Linux Kernel's origins, GPL v2 licensing, ethical foundations, technical footprint, and its broader role in the FOSS ecosystem.
-* **Bash Scripting Portfolio:** Five custom shell scripts demonstrating core Linux command-line proficiencies, including variables, control structures (loops/conditionals), file manipulation, and user input handling.
+* **Structured Audit:** An in-depth analysis of the Linux Kernel's origins, GPL v2 licensing, ethical foundations, and its role in the FOSS ecosystem.
+* **Bash Scripting Portfolio:** Five custom shell scripts demonstrating core Linux command-line proficiencies.
 
 ---
 
@@ -43,112 +42,159 @@ This capstone project for the Open Source Software (OSS NGMC) course at VIT prov
 The-Open-Source-Audit/
 │
 ├── README.md               ← You are here
-├── .gitignore
-│
 ├── scripts/
-│   ├── script1_system_identity.sh      ← System Identity Report
-│   ├── script2_package_inspector.sh    ← FOSS Package Inspector
-│   ├── script3_disk_permission_audit.sh    ← Disk & Permission Auditor
-│   ├── script4_log_analyzer.sh         ← Log File Analyzer
-│   └── script5_manifesto_generator.sh      ← Manifesto Generator
-│
-├── # ... (previous tree structure)
-├── report/
-│   └── OSS_Audit_Report_ManvendraSinghShah_24BSA10284.pdf
-│
+│   ├── script1_system_identity.sh
+│   ├── script2_package_inspector.sh
+│   ├── script3_disk_permission_audit.sh
+│   ├── script4_log_analyzer.sh
+│   └── script5_manifesto_generator.sh
 └── screenshots/
     └── (script output screenshots)
-``` 
+```
 
-⚡ Quick Start — Run All Scripts
-# ...
-    # 1. Make all scripts executable at once
+---
+
+## 📜 Report Structure
+
+The full report (23 pages) covers all required parts of the audit:
+
+| Part | Topic | Marks |
+|---|---|---|
+| **A1** | Origin Story of the Linux Kernel | 12 |
+| **A2** | GPL v2 License Analysis | 12 |
+| **A3** | Ethics of Open Source | 10 |
+| **B**  | Linux Footprint on a Running System | 10 |
+| **C**  | The FOSS Ecosystem | 8 |
+| **D**  | Open Source vs Proprietary Comparison | 8 |
+| **Scripts** | 5 Shell Scripts (8 marks each) | 40 |
+| | **Total** | **100** |
+
+---
+
+## 🛠️ Shell Scripts
+
+### Script 1 — System Identity Report
+**File:** `scripts/script1_system_identity.sh`
+
+Displays a welcome screen showing distro name, kernel version, logged-in user, home directory, uptime, date/time, and the GPL v2 license message.
+
+**Concepts:** Variables, `echo`, command substitution `$()`, `/etc/os-release`, `uname`, `whoami`, `uptime`, `date`
+
+```bash
+chmod +x scripts/script1_system_identity.sh
+./scripts/script1_system_identity.sh
+```
+
+---
+
+### Script 2 — FOSS Package Inspector
+**File:** `scripts/script2_package_inspector.sh`
+
+Checks if the Linux kernel package is installed, prints version and license details, and uses a `case` statement to display a philosophy note about the package.
+
+**Concepts:** `if-then-else`, `case` statement, `dpkg` / `rpm`, `grep`, pipes
+
+```bash
+chmod +x scripts/script2_package_inspector.sh
+./scripts/script2_package_inspector.sh
+```
+
+---
+
+### Script 3 — Disk and Permission Auditor
+**File:** `scripts/script3_disk_permission_audit.sh`
+
+Loops through key system directories and reports permissions, owner, group, and disk usage. Includes a dedicated check for kernel-specific directories like `/boot` and `/lib/modules`.
+
+**Concepts:** `for` loop, array variables, `ls -ld`, `du -sh`, `awk`, `cut`
+
+```bash
+chmod +x scripts/script3_disk_permission_audit.sh
+./scripts/script3_disk_permission_audit.sh
+```
+
+---
+
+### Script 4 — Log File Analyzer
+**File:** `scripts/script4_log_analyzer.sh`
+
+Reads a log file line by line, counts keyword matches, and prints the last 5 matching lines. Accepts log file path and keyword as arguments.
+
+**Concepts:** `while read` loop, counter variable, `$1`/`$2` arguments, `grep`, `tail`
+
+```bash
+chmod +x scripts/script4_log_analyzer.sh
+
+# Usage
+./scripts/script4_log_analyzer.sh /var/log/syslog error
+./scripts/script4_log_analyzer.sh /var/log/syslog warning
+```
+
+---
+
+### Script 5 — Open Source Manifesto Generator
+**File:** `scripts/script5_manifesto_generator.sh`
+
+Asks the user three interactive questions and generates a personalised open-source philosophy statement, saving it to a `.txt` file.
+
+**Concepts:** `read`, string concatenation, `>` / `>>` file writing, `date`, alias concept
+
+```bash
+chmod +x scripts/script5_manifesto_generator.sh
+./scripts/script5_manifesto_generator.sh
+```
+
+---
+
+## ⚡ Quick Start — Run All Scripts
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/[yourusername]/oss-audit-24BSA10284.git
+cd oss-audit-24BSA10284
+
+# 2. Make all scripts executable at once
 chmod +x scripts/*.sh
 
-# 2. Run each script
+# 3. Run each script
 ./scripts/script1_system_identity.sh
 ./scripts/script2_package_inspector.sh
 ./scripts/script3_disk_permission_audit.sh
-./scripts/script4_log_analyzer.sh /var/log/syslog error
+./scripts/script4_log_analyzer.sh /var/log/syslog
 ./scripts/script5_manifesto_generator.sh
+```
+
+---
+
+## 📦 Dependencies
+
+| Script | Dependencies | Notes |
+|---|---|---|
+| Script 1 | `bash`, `uname`, `whoami`, `uptime`, `date` | Available on all Linux systems |
+| Script 2 | `dpkg` or `rpm` | Auto-detected based on your distro |
+| Script 3 | `ls`, `du`, `awk`, `cut` | Available on all Linux systems |
+| Script 4 | `grep`, `tail` | Needs a readable log file path as argument |
+| Script 5 | `bash`, `date` | No external dependencies |
+
+> **Tested on:** Ubuntu 22.04 LTS / Fedora 38
+
+---
+
+## 🔗 References
+
+- [Linux Kernel Source — kernel.org](https://www.kernel.org)
+- [GNU GPL v2 License Text](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
+- [The Free Software Definition — GNU](https://www.gnu.org/philosophy/free-sw.html)
+- [The Cathedral and the Bazaar — Eric S. Raymond](http://catb.org/~esr/writings/cathedral-bazaar/)
+- [The Linux Command Line — William Shotts](https://linuxcommand.org/tlcl.php)
+- [GNU Bash Manual](https://www.gnu.org/software/bash/manual/)
+
+---
 
 <div align="center">
 
-Submitted as part of the Open Source Software (OSS NGMC) Capstone Project — VIT Bhopal
+*Submitted as part of the Open Source Software (OSS NGMC) Capstone Project — VIT*
 
-Manvendra Singh Shah | 24BSA10284 | Slot: f11
+*Manvendra Singh Shah | 24BSA10284*
 
 </div>
-EOF
-
-cat << 'EOF' > scripts/script1_system_identity.sh
-#!/bin/bash
-echo "=================================================="
-echo "  Open Source Audit — Manvendra Singh Shah"
-echo "  Roll No : 24BSA10284"
-echo "  Slot    : f11"
-echo "  Software: Linux Kernel"
-echo "=================================================="
-echo ""
-echo "Distribution : $(grep PRETTY_NAME /etc/os-release | cut -d '"' -f 2)"
-echo "Kernel       : $(uname -r)"
-echo "User         : $(whoami)"
-echo "Home Dir     : $HOME"
-echo "Uptime       : $(uptime -p)"
-echo "Date/Time    : $(date)"
-echo ""
-echo "--------------------------------------------------"
-echo "OS License   : GNU General Public License v2 (GPL-2.0)"
-echo "This means   : You are free to run, study, share,"
-echo "               and modify this operating system."
-echo "--------------------------------------------------"
-EOF
-
-cat << 'EOF' > scripts/script5_manifesto_generator.sh
-#!/bin/bash
-echo "=================================================="
-echo "  Open Source Manifesto Generator"
-echo "  Powered by: Bash + your own thinking"
-echo "=================================================="
-echo ""
-echo "Answer three questions and I will write your manifesto."
-echo ""
-read -p "1. Name one open-source tool you use every day: " tool
-read -p "2. In one word, what does 'freedom' mean to you? " freedom
-read -p "3. Name one thing you would build and share freely: " build
-echo ""
-echo "Generating your manifesto..."
-echo ""
-
-filename="manifesto_Manvendra.txt"
-
-cat << MANIFESTO > $filename
-MY OPEN SOURCE MANIFESTO Generated on: $(date) By: Manvendra Singh Shah (24BSA10284)
-I believe in the power of open source.
-
-Every day I rely on $tool — a tool built by the community,
-for the community, and given freely to the world.
-It exists because someone chose to share rather than to lock away.
-
-To me, freedom means $freedom.
-That is exactly what open-source software protects —
-not just the freedom to use a program, but the freedom to understand it,
-improve it, and pass it on to someone else.
-
-One day I will build $build and share it freely with the world.
-Because knowledge shared is knowledge multiplied.
-Every great tool I use today exists because someone before me chose to share their work.
-
-I stand on the shoulders of giants — Linus Torvalds, Richard Stallman,
-and the thousands of unnamed contributors who wrote code at night
-for no pay and no recognition, only the belief that it mattered.
-
-I carry that responsibility forward.
-
-— Manvendra Singh Shah, $(date '+%A, %d %B %Y')
-MANIFESTO
-
-echo "Manifesto saved to: $filename"
-echo "--------------------------------------------------"
-cat $filename
-EOF
